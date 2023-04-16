@@ -23,3 +23,20 @@ conn.commit()
 
 cur.close()
 conn.close()
+
+# This is the function in the Pg:
+'''
+CREATE or replace FUNCTION table_by_age (x INTEGER)
+RETURNS table(name text,
+    age integer,
+    height real)
+AS $$
+BEGIN
+    return query
+	select person.name, person.age, person.height
+	from person 
+	where person.age = x;
+END;
+$$ 
+LANGUAGE plpgsql;
+'''
